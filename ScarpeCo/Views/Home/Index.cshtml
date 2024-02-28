@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Prodotti";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-4">
+            <div class="thumbnail border border-secondary rounded-4 shadow p-2">
+                <img src="@item.ImmagineCop" alt="@item.NomeProdotto" class="mw-100">
+                <div class="caption text-center">
+                    <h3>@item.NomeProdotto</h3>
+                    <p>@item.Descrizione</p>
+                    <p>@item.Prezzo soldi</p>
+                    <div class="d-flex justify-content-around">
+                        @Html.ActionLink("Dettagli", "DettaglioProdotto", new { id = item.IdProdotto }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Delete", "DeleteProduct", new { id = item.IdProdotto }, new { @class = "btn btn-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
