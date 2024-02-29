@@ -11,18 +11,31 @@
 <div class="row">
     @foreach (var item in Model)
     {
-        <div class="col-4">
-            <div class="thumbnail border border-secondary rounded-4 shadow p-2">
-                <img src="@item.ImmagineCop" alt="@item.NomeProdotto" class="mw-100">
-                <div class="caption text-center">
-                    <h3>@item.NomeProdotto</h3>
-                    <p>@item.Descrizione</p>
-                    <p>@item.Prezzo soldi</p>
-                    <div class="d-flex justify-content-around">
-                        @Html.ActionLink("Dettagli", "DettaglioProdotto", new { id = item.IdProdotto }, new { @class = "btn btn-primary" })
-                        @Html.ActionLink("Delete", "DeleteProduct", new { id = item.IdProdotto }, new { @class = "btn btn-danger" })
-                    </div>
+
+        
+        <div class="mb-3">
+
+            <div class="border border-secondary rounded-4 shadow h-100 p-2 d-flex align-items-center">
+                <img src=@item.ImmagineCop alt="@item.NomeProdotto" height="100" width="100" class=" rounded-circle @(item.IsVisible ? "" : "opacity-50")">
+                
+                <div class="ms-5 @(item.IsVisible ? "" : "opacity-50")">
+                    <h3 class="m-0">NOME: @item.NomeProdotto</h3>
+                    <p class="m-0">DESCRIZIONE: @item.Descrizione</p>
                 </div>
+                    @if (item.IsVisible)
+                    {
+                        <p class="m-0 ms-4 @(item.IsVisible ? "" : "opacity-50")">PREZZO: @item.Prezzo soldi</p>
+                    }
+                    else
+                    {
+                        <p class="m-0 ms-4 @(item.IsVisible ? "" : "opacity-50")">Esaurito</p>
+                    }
+
+                        <div class="d-flex flex-column ms-auto">
+                            @Html.ActionLink("Dettagli", "DettaglioProdotto", new { id = item.IdProdotto }, new { @class = "btn btn-primary" })
+                            @Html.ActionLink(@item.IsVisible ? "Rimuovi" : "Aggiungi", "DeleteProduct", new { id = item.IdProdotto }, new { @class = "btn btn-danger" })
+                        </div>
+                   
             </div>
         </div>
     }
